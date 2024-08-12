@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:22:30 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/12 12:28:35 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/12 18:32:03 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * @param argv La cadena de caracteres que contiene los argumentos.
  * @return 1 si los argumentos son válidos, 0 si no lo son.
  */
-int	check_content_args(char *argv)
+static int	check_content_args(char *argv)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ int	check_content_args(char *argv)
  * @param argc El número de argumentos proporcionados al programa.
  * @return 0 si el número de argumentos es inválido, 1 si es válido.
  */
-int	check_num_args(int argc)
+static int	check_num_args(int argc)
 {
 	if (argc < 5 || argc > 6)
 	{
@@ -85,7 +85,7 @@ int	check_valid_args(int argc, char *argv[])
 		return (0);
 	while (i < argc)
 	{
-		if (ft_atoi(argv[i]) <= 0 || check_content_args(argv[i]) == 0)
+		if ((ft_atoi(argv[i]) <= 0) || (check_content_args(argv[i]) == 0))
 		{
 			printf(RED "Error: " DEFAULT "Argument %d is invalid\n", i);
 			return (0);

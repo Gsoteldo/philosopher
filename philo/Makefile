@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 17:06:58 by gabo              #+#    #+#              #
-#    Updated: 2024/08/12 12:35:51 by gabo             ###   ########.fr        #
+#    Updated: 2024/08/12 18:30:46 by gsoteldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 GREEN = \033[0;32m
 RED = \033[0;31m
 NC = \033[0m
-CURRENT_FILE = 1
-TOTAL_FILES = $(words $(SRC))
+# CURRENT_FILE = 1
+# TOTAL_FILES = $(words $(SRC))
 
 
 NAME = philo
@@ -22,6 +22,7 @@ NAME = philo
 SRC = philo.c \
 	checker.c \
 	utils.c \
+	initialization.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,6 +33,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME) show_progress
 
 $(NAME): $(OBJ)
+	@echo "$(GREEN)Compiling...$(NC)"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 show_progress:

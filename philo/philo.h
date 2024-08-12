@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:29 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/11 19:07:11 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/12 18:23:13 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,15 @@ typedef struct s_data
 	int				dead_flag;
 } t_data;
 
-int	ft_atoi(const char *str);
 
 //check arguments
 int	check_valid_args(int argc, char *argv[]);
+
+//initialize philo
+void	init_philo(t_data *data, char *argv[]);
+
+//Utils functions
+int	ft_atoi(const char *str);
+
 
 #endif

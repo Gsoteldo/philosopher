@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:16 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/12 12:22:10 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/12 18:32:36 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ void	*routine()
 
 int	main(int argc, char *argv[])
 {
-	//t_data data;
-	//t_philo		*philo;
+	t_data data;
 
 	pthread_t	*thread;
 	pthread_mutex_t	mutex;
@@ -48,6 +47,9 @@ int	main(int argc, char *argv[])
 	pthread_mutex_init(&mutex, NULL);
 	if (check_valid_args(argc, argv) == 0)
 		return (1);
+	init_philo(&data, argv);
+
+	
 	thread = malloc(sizeof(pthread_t) * ft_atoi(argv[1]));
 	if (!thread)
 	{
