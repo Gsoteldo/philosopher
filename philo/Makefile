@@ -6,7 +6,7 @@
 #    By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 17:06:58 by gabo              #+#    #+#              #
-#    Updated: 2024/08/12 18:30:46 by gsoteldo         ###   ########.fr        #
+#    Updated: 2024/08/13 21:24:26 by gsoteldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRC = philo.c \
 	checker.c \
 	utils.c \
 	initialization.c \
+	routine.c \
+	thread_management.c \
 
 OBJ = $(SRC:.c=.o)
 

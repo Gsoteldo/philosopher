@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/11 17:59:50 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/13 21:13:18 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void printf_with_id_and_time(t_philo *philo, int id, char *str)
+{
+	size_t	time;
+
+	pthread_mutex_lock(philo->print_mutex);
+	time = get_current_time() - philo->start_time;
+	printf("%ld %d %s\n", time, id, str);
+	pthread_mutex_unlock(philo->print_mutex);
+}
+
+size_t	get_current_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
 
 size_t	ft_strlen(const char *str)
 {
