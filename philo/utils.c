@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/13 21:13:18 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:02:43 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void free_and_destroy(t_data *data, pthread_mutex_t *forks)
+{
+	int i;
+	int num;
+
+	i = 0;
+	num = data->philo[0].num_of_philo;
+	while (i < num)
+	{
+		free(&data->philo[i]);
+		i++;
+	}
+	free(data);
+	i = 0;
+	while (i < num)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		i++;
+	}
+	free(forks);
+	pthread_mutex_destroy(forks);
+	pthread_mutex_destroy(&data->eat_mutex);
+	pthread_mutex_destroy(&data->print_mutex);
+}
 
 void printf_with_id_and_time(t_philo *philo, int id, char *str)
 {

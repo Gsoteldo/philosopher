@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:16 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/13 21:23:55 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/15 11:32:01 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	main(int argc, char *argv[])
 {
 	t_data data;
 	pthread_mutex_t forks;
-	// int			i;
-
-	// i = 0;
+	
 	if (check_valid_args(argc, argv) == 0)
 		return (1);
 	initialization_philo(&data, &forks, argv);
@@ -56,18 +54,5 @@ int	main(int argc, char *argv[])
 	// 	else
 	// 		printf("Philo left fork doesnt exit for philo %d\n\n", data.philo[i].id);
 	// 	i++;
-
-	// 	// pthread_create(&thread[i], NULL, routine, NULL);
-	// 	// i++;
-	// }
-	// i = 0;
-	// while (i < ft_atoi(argv[1]))
-	// {
-	// 	pthread_join(thread[i], NULL);
-	// 	i++;
-	// }
-	// printf("%d\n", prueba);
-	// free(thread);
-	// pthread_mutex_destroy(&mutex);
 	return (0);
 }
