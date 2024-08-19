@@ -6,7 +6,7 @@
 /*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:57:05 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/15 16:10:46 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/19 15:29:41 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 int is_dead(t_philo *philo)
 {
-	size_t current_time;
+	//size_t current_time;
 
-	current_time = get_current_time();
+	// current_time = get_current_time();
 	pthread_mutex_lock(philo->eat_mutex);
-	if (current_time - philo->last_meal > philo->time_to_die && philo->eat_flag == 0)
+	if (get_current_time() - philo->last_meal >= philo->time_to_die && philo->eat_flag == 0)
 	{
 		pthread_mutex_unlock(philo->eat_mutex);
 		return (1);

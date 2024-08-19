@@ -6,7 +6,7 @@
 /*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:31:49 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/15 16:13:16 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/19 15:38:55 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void eating(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
+	// if (philo->num_of_philo == 1)
+	// {
+	// 	usleep(philo->time_to_die * 1000);
+	// 	pthread_mutex_unlock(philo->r_fork);
+	// 	return ;
+	// }
 	pthread_mutex_lock(philo->l_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
 	philo->eat_flag = 1;
@@ -78,5 +84,5 @@ void   *routine(void *arg)
 		sleeping(philo);
 		thinking(philo);
 	}
-	return (NULL);
+	return (arg);
 }
