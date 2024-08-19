@@ -3,42 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:16 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/15 11:32:01 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/19 19:09:18 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	*routine()
-// {
-// 	int i;
-
-// 	i = 0;
-// 	printf("Hello from routine\n");
-// 	sleep(3);
-// 	printf("Goodbye from routine\n");
-// 	while (i < 10000000)
-// 	{
-// 		pthread_mutex_lock(&mutex);
-// 		prueba++;
-// 		pthread_mutex_unlock(&mutex);
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
-
 int	main(int argc, char *argv[])
 {
 	t_data data;
-	pthread_mutex_t forks;
+	pthread_mutex_t *forks;
 	
+	forks = NULL;
 	if (check_valid_args(argc, argv) == 0)
 		return (1);
+//	pthread_mutex_init(forks, NULL);
 	initialization_philo(&data, &forks, argv);
-	create_threads(&data, &forks);
+	create_threads(&data, forks);
+	free_and_destroy(&data, forks);
+	return (0);
+}
+
 	// while (i < ft_atoi(argv[1]))
 	// {
 	// 	printf("Philo id%d\n", data.philo[i].id);
@@ -54,5 +42,3 @@ int	main(int argc, char *argv[])
 	// 	else
 	// 		printf("Philo left fork doesnt exit for philo %d\n\n", data.philo[i].id);
 	// 	i++;
-	return (0);
-}

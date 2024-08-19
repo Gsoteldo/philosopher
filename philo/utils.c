@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/15 12:02:43 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/19 19:18:51 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,23 @@ void free_and_destroy(t_data *data, pthread_mutex_t *forks)
 
 	i = 0;
 	num = data->philo[0].num_of_philo;
-	while (i < num)
-	{
-		free(&data->philo[i]);
-		i++;
-	}
-	free(data);
+	// printf("num: %d\n", num);
+	free(data->philo);
+	// while (i < num)
+	// {
+	// 	printf("Puntero %p\n", &data->philo[i]);
+	// 	free(&data->philo[i + 1]);
+	// 	printf("Puntero liberado %p\n", &data->philo[i]);
+	// 	i++;
+	// }
+	// free(data->philo);
 	i = 0;
 	while (i < num)
 	{
 		pthread_mutex_destroy(&forks[i]);
 		i++;
 	}
-	free(forks);
-	pthread_mutex_destroy(forks);
+	// free(forks);
 	pthread_mutex_destroy(&data->eat_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 }

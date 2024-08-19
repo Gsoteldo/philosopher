@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+         #
+#    By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 17:06:58 by gabo              #+#    #+#              #
-#    Updated: 2024/08/15 15:29:29 by gabo             ###   ########.fr        #
+#    Updated: 2024/08/19 17:13:55 by gsoteldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ $(NAME): $(OBJ)
 
 show_progress:
 	@if [ -f $(NAME) ]; then \
-		echo "$(GREEN)The compiled code is already updated.👍$(NC)"; \
+		echo "$(GREEN)The compiled code is already updated.$(NC)"; \
 	fi
 
 git:

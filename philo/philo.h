@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:29 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/15 16:09:53 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/19 18:56:51 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ typedef struct s_philo
 	int				num_of_meals;
 	int				num_of_philo;
 	pthread_mutex_t	*eat_mutex;
-	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*dead_mutex;
+	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_t		thread;
 	size_t			last_meal;
@@ -58,7 +58,8 @@ typedef struct s_data
 int		check_valid_args(int argc, char *argv[]);
 
 //initialize philo
-void	initialization_philo(t_data *data, pthread_mutex_t *forks, char *argv[]);
+void	initialization_philo(t_data *data, pthread_mutex_t **forks, char *argv[]);
+
 //Routine functions
 void	*routine(void *arg);
 void	*monitor (void *arg);

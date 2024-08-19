@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:31:49 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/19 15:38:55 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/19 19:18:36 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int dead_philo(t_philo *philo)
 	if (*philo->dead_flag == 1)
 	{
 		pthread_mutex_unlock(philo->dead_mutex);
-		return (0);
+		return (1);
 	}
 	pthread_mutex_unlock(philo->dead_mutex);
-	return (1);
+	return (0);
 }
 
 void thinking(t_philo *philo)
@@ -78,11 +78,13 @@ void   *routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while (dead_philo(philo))
+	while (!dead_philo(philo))
 	{
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
+		// printf("Routine11\n");
 	}
+		// printf("Routine\n");
 	return (arg);
 }
