@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:10:07 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/19 18:11:06 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:03:50 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void create_threads(t_data *data, pthread_mutex_t *forks)
 		{
 			printf("Error creating thread\n");
 			free_and_destroy(data, forks);
-			return ;
+			// return ;
 		}
 		i++;
 	}
@@ -38,16 +38,18 @@ void create_threads(t_data *data, pthread_mutex_t *forks)
 	if (pthread_join(monitoring, NULL) != 0)
 	{
 		printf("Error joining thread\n");
-		return ;
+		free_and_destroy(data, forks);
+		// return ;
 	}
 	while (i < data->philo[0].num_of_philo)
 	{
 		if (pthread_join(data->philo[i].thread, NULL) != 0)
 		{
 			printf("Error joining thread\n");
-			return ;
+			free_and_destroy(data, forks);
+			// return ;
 		}
 		i++;
 	}
-	
+	return ;
 }

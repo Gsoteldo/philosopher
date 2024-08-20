@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:21:39 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/19 19:18:06 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/20 20:51:02 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void init_values(t_data *data, char *argv[], pthread_mutex_t **forks)
 		data->philo[i].start_time = get_current_time();
 		data->philo[i].last_meal = get_current_time();
 		data->philo[i].eat_flag = 0;
+		data->philo[i].times_eaten = 0;
 		data->philo[i].print_mutex = &data->print_mutex;
 		data->philo[i].eat_mutex = &data->eat_mutex;
 		data->philo[i].dead_mutex = &data->dead_mutex;

@@ -6,11 +6,21 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/19 19:18:51 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/20 17:57:28 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(500);
+	return (0);
+}
 
 void free_and_destroy(t_data *data, pthread_mutex_t *forks)
 {
@@ -35,7 +45,7 @@ void free_and_destroy(t_data *data, pthread_mutex_t *forks)
 		pthread_mutex_destroy(&forks[i]);
 		i++;
 	}
-	// free(forks);
+	free(forks);
 	pthread_mutex_destroy(&data->eat_mutex);
 	pthread_mutex_destroy(&data->print_mutex);
 }
@@ -46,6 +56,11 @@ void printf_with_id_and_time(t_philo *philo, int id, char *str)
 
 	pthread_mutex_lock(philo->print_mutex);
 	time = get_current_time() - philo->start_time;
+	if (*philo->dead_flag == 1)
+	{
+		pthread_mutex_unlock(philo->print_mutex);
+		return ;
+	}
 	printf("%ld %d %s\n", time, id, str);
 	pthread_mutex_unlock(philo->print_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:31:49 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/19 19:18:36 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/20 21:03:36 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,30 @@ void thinking(t_philo *philo)
 void sleeping(t_philo *philo)
 {
 	printf_with_id_and_time(philo, philo->id, "is sleeping");
-	usleep(philo->time_to_sleep * 1000);
+	ft_usleep(philo->time_to_sleep);
 }
 
 void eating(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
-	// if (philo->num_of_philo == 1)
-	// {
-	// 	usleep(philo->time_to_die * 1000);
-	// 	pthread_mutex_unlock(philo->r_fork);
-	// 	return ;
-	// }
+	if (philo->num_of_philo == 1)
+	{
+		ft_usleep(philo->time_to_die);
+		pthread_mutex_unlock(philo->r_fork);
+		return ;
+	}
 	pthread_mutex_lock(philo->l_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
 	philo->eat_flag = 1;
 	printf_with_id_and_time(philo, philo->id, "is eating");
+	printf("Philo %d: Eating %d \n", philo->id, philo->times_eaten + 1);
 	pthread_mutex_lock(philo->eat_mutex);
 	philo->last_meal = get_current_time();
+	philo->times_eaten++;
+	
 	pthread_mutex_unlock(philo->eat_mutex);
-	usleep(philo->time_to_eat * 1000);
+	ft_usleep(philo->time_to_eat);
 	philo->eat_flag = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
@@ -77,14 +80,12 @@ void   *routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(1000);
+		ft_usleep(1);
 	while (!dead_philo(philo))
 	{
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
-		// printf("Routine11\n");
 	}
-		// printf("Routine\n");
 	return (arg);
 }
