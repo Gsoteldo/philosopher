@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:16 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/22 14:00:16 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/23 17:17:06 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(int argc, char *argv[])
 	forks = NULL;
 	if (check_valid_args(argc, argv) == 0)
 		return (1);
-	initialization_philo(&data, &forks, argv);
+	start_philo(&data, &forks, argv);
 	create_threads(&data, forks);
-	free_and_destroy(&data, forks);
+	free_and_destroy(&data, forks, NULL);
 	return (0);
 }

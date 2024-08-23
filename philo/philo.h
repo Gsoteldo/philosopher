@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:29 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/22 14:00:16 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/23 17:13:50 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define RED "\033[0;31m"
 # define GREEN "\033[0;32m"
 # define YELLOW "\033[0;33m"
-# define DEFAULT "\033[0m"
+# define NC "\033[0m"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -59,7 +59,7 @@ typedef struct s_data
 int		check_valid_args(int argc, char *argv[]);
 
 //initialize philo
-void	initialization_philo(t_data *data, pthread_mutex_t **forks, char *argv[]);
+void	start_philo(t_data *data, pthread_mutex_t **forks, char *argv[]);
 
 //Routine functions
 void	*routine(void *arg);
@@ -72,7 +72,7 @@ void	create_threads(t_data *data, pthread_mutex_t *forks);
 int		ft_atoi(const char *str);
 void	printf_with_id_and_time(t_philo *philo, int id, char *str);
 size_t	get_current_time(void);
-void	free_and_destroy(t_data *data, pthread_mutex_t *forks);
+void	free_and_destroy(t_data *data, pthread_mutex_t *forks, char *str);
 int		ft_usleep(size_t milliseconds);
 
 #endif

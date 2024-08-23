@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:22:30 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/12 18:32:03 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:13:49 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	check_num_args(int argc)
 {
 	if (argc < 5 || argc > 6)
 	{
-		printf(RED "Error: " DEFAULT "Invalid number of arguments\n\n");
+		printf(RED "Error: " NC "Invalid number of arguments\n\n");
 		printf("\tUsage: ./philo [number_of_philosophers] [time_to_die]");
 		printf(" [time_to_eat] [time_to_sleep] ");
 		printf("[number_of_times_each_philosopher_must_eat]\n");
@@ -87,7 +87,7 @@ int	check_valid_args(int argc, char *argv[])
 	{
 		if ((ft_atoi(argv[i]) <= 0) || (check_content_args(argv[i]) == 0))
 		{
-			printf(RED "Error: " DEFAULT "Argument %d is invalid\n", i);
+			printf(RED "Error: " NC "Argument %d is invalid\n", i);
 			return (0);
 		}
 		i++;

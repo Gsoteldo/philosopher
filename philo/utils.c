@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/22 13:42:25 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/23 17:10:57 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ int	ft_usleep(size_t milliseconds)
 	return (0);
 }
 
-void	free_and_destroy(t_data *data, pthread_mutex_t *forks)
+void	free_and_destroy(t_data *data, pthread_mutex_t *forks, char *str)
 {
 	int	i;
 	int	num;
 
 	i = 0;
 	num = data->philo[0].num_of_philo;
+	if (str)
+		printf("%s\n", str);
 	free(data->philo);
 	while (i < num)
 	{

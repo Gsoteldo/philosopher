@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:31:49 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/22 14:11:32 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/23 17:17:57 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	eating(t_philo *philo)
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
 	philo->eat_flag = 1;
 	printf_with_id_and_time(philo, philo->id, "is eating");
-	printf("Philo %d: Eating %d \n", philo->id, philo->times_eaten + 1);
 	pthread_mutex_lock(philo->eat_mutex);
 	philo->last_meal = get_current_time();
 	philo->times_eaten++;
@@ -66,6 +65,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 }
+	/*printf("Philo %d: Eating %d \n", philo->id, philo->times_eaten + 1);*/
 
 void	*routine(void *arg)
 {
