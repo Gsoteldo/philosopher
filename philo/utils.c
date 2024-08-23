@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/20 17:57:28 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:42:25 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,14 @@ int	ft_usleep(size_t milliseconds)
 	return (0);
 }
 
-void free_and_destroy(t_data *data, pthread_mutex_t *forks)
+void	free_and_destroy(t_data *data, pthread_mutex_t *forks)
 {
-	int i;
-	int num;
+	int	i;
+	int	num;
 
 	i = 0;
 	num = data->philo[0].num_of_philo;
-	// printf("num: %d\n", num);
 	free(data->philo);
-	// while (i < num)
-	// {
-	// 	printf("Puntero %p\n", &data->philo[i]);
-	// 	free(&data->philo[i + 1]);
-	// 	printf("Puntero liberado %p\n", &data->philo[i]);
-	// 	i++;
-	// }
-	// free(data->philo);
-	i = 0;
 	while (i < num)
 	{
 		pthread_mutex_destroy(&forks[i]);
@@ -50,7 +40,7 @@ void free_and_destroy(t_data *data, pthread_mutex_t *forks)
 	pthread_mutex_destroy(&data->print_mutex);
 }
 
-void printf_with_id_and_time(t_philo *philo, int id, char *str)
+void	printf_with_id_and_time(t_philo *philo, int id, char *str)
 {
 	size_t	time;
 
@@ -72,18 +62,6 @@ size_t	get_current_time(void)
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
 }
 
 int	ft_atoi(const char *str)

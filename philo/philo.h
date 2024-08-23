@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:29 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/20 20:50:49 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:00:16 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_philo
 	int				id;
 	int				num_of_meals;
 	int				num_of_philo;
-	int 			times_eaten;
+	int				times_eaten;
 	pthread_mutex_t	*eat_mutex;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*dead_mutex;
@@ -63,16 +63,16 @@ void	initialization_philo(t_data *data, pthread_mutex_t **forks, char *argv[]);
 
 //Routine functions
 void	*routine(void *arg);
-void	*monitor (void *arg);
+void	*monitor(void *arg);
 
 //Thread management
-void create_threads(t_data *data, pthread_mutex_t *forks);
+void	create_threads(t_data *data, pthread_mutex_t *forks);
 
 //Utils functions
 int		ft_atoi(const char *str);
 void	printf_with_id_and_time(t_philo *philo, int id, char *str);
 size_t	get_current_time(void);
-void 	free_and_destroy(t_data *data, pthread_mutex_t *forks);
+void	free_and_destroy(t_data *data, pthread_mutex_t *forks);
 int		ft_usleep(size_t milliseconds);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:31:49 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/20 21:03:36 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:11:32 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ◦ timestamp_in_ms X died
 */
 
-int dead_philo(t_philo *philo)
+int	dead_philo(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_mutex);
 	if (*philo->dead_flag == 1)
@@ -31,18 +31,18 @@ int dead_philo(t_philo *philo)
 	return (0);
 }
 
-void thinking(t_philo *philo)
+void	thinking(t_philo *philo)
 {
 	printf_with_id_and_time(philo, philo->id, "is thinking");
 }
 
-void sleeping(t_philo *philo)
+void	sleeping(t_philo *philo)
 {
 	printf_with_id_and_time(philo, philo->id, "is sleeping");
 	ft_usleep(philo->time_to_sleep);
 }
 
-void eating(t_philo *philo)
+void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
@@ -60,7 +60,6 @@ void eating(t_philo *philo)
 	pthread_mutex_lock(philo->eat_mutex);
 	philo->last_meal = get_current_time();
 	philo->times_eaten++;
-	
 	pthread_mutex_unlock(philo->eat_mutex);
 	ft_usleep(philo->time_to_eat);
 	philo->eat_flag = 0;
@@ -68,15 +67,9 @@ void eating(t_philo *philo)
 	pthread_mutex_unlock(philo->r_fork);
 }
 
-
-void   *routine(void *arg)
+void	*routine(void *arg)
 {
-	/*
-	1) Comer
-	2) Dormir
-	3) Pensar
-	*/
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
