@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 18:44:51 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/23 18:45:59 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/24 14:51:00 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,24 @@ static int	check_num_args(int argc)
 	if (argc < 5 || argc > 6)
 	{
 		printf(RED "Error: " NC "Invalid number of arguments\n\n");
-		printf("\tUsage: ./philo [number_of_philosophers] [time_to_die]");
-		printf(" [time_to_eat] [time_to_sleep] ");
+		printf("\tUsage: ./philo_bonus [number_of_philosophers]");
+		printf(" [time_to_die] [time_to_eat] [time_to_sleep] ");
 		printf("[number_of_times_each_philosopher_must_eat]\n");
+		return (0);
+	}
+	return (1);
+}
+
+static int	check_max_min(char *argv)
+{
+	if (ft_atol(argv) > 2147483647)
+	{
+		printf(RED "Error: " NC "Argument is too large\n");
+		return (0);
+	}
+	else if (ft_atol(argv) < 0)
+	{
+		printf(RED "Error: " NC "Argument is too small\n");
 		return (0);
 	}
 	return (1);
@@ -85,7 +100,7 @@ int	check_valid_args(int argc, char *argv[])
 		return (0);
 	while (i < argc)
 	{
-		if ((ft_atoi(argv[i]) <= 0) || (check_content_args(argv[i]) == 0))
+		if ((check_max_min(argv[i]) == 0) || (check_content_args(argv[i]) == 0))
 		{
 			printf(RED "Error: " NC "Argument %d is invalid\n", i);
 			return (0);

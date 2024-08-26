@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 20:37:50 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/23 20:45:45 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:15:46 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
 	int	i;
-	int	num;
+	long	num;
 	int	negativo;
 
 	i = 0;
@@ -56,4 +56,26 @@ int	ft_atoi(const char *str)
 	if (negativo % 2 == 1)
 		return (num * -1);
 	return (num);
+}
+
+void	printf_with_id_and_time(t_data *data, int id, char *str)
+{
+	size_t	time;
+
+	sem_wait(data->print_semaphore);
+	time = get_current_time() - data->start_time;
+	if (data->dead_flag == 1)
+	{
+		sem_post(data->print_semaphore);
+		return ;
+	}
+	printf("%ld %d %s\n", time, id, str);
+	sem_post(data->print_semaphore);
+}
+
+
+
+void kill_them_all()
+{
+	kill(0, SIGINT);
 }

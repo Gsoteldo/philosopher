@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+         #
+#    By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/23 18:37:05 by gsoteldo          #+#    #+#              #
-#    Updated: 2024/08/23 20:46:45 by gsoteldo         ###   ########.fr        #
+#    Updated: 2024/08/26 13:18:53 by gabo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,11 @@ NAME = philo_bonus
 SRC = philo_bonus.c \
 	checker_bonus.c \
 	utils_bonus.c \
-	# initialization.c \
-	# routine.c \
-	# monitoring.c \
-	# thread_management.c \
+	initialization_bonus.c \
+	process_management_bonus.c \
+	routine_bonus.c \
+	monitoring_bonus.c \
+	ft_itoa_join_bonus.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -41,7 +42,7 @@ $(NAME): $(OBJ)
 
 %.o: %.c
 	$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE) + 1))))
-	@printf "Compiling $<... $(shell echo $$(($(CURRENT_FILE) * 100 / $(TOTAL_FILES))))%%\n"
+	@printf "Compiling $<... $(shell echo $$(($(CURRENT_FILE) * 100 / $(TOTAL_FILES))))%%\r"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 show_progress:
