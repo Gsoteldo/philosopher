@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:57:05 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/27 13:43:25 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/27 20:58:31 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	dead_philo(t_philo *philo)
+{
+	pthread_mutex_lock(philo->dead_mutex);
+	if (*philo->dead_flag == 1)
+	{
+		pthread_mutex_unlock(philo->dead_mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->dead_mutex);
+	return (0);
+}
 
 int	is_dead(t_philo *philo)
 {
@@ -27,7 +39,7 @@ int	is_dead(t_philo *philo)
 
 int	dead_comprobation(t_philo *philo)
 {
-	int	i;
+	int		i;
 	size_t	time;
 
 	i = 0;
@@ -38,7 +50,6 @@ int	dead_comprobation(t_philo *philo)
 		{
 			pthread_mutex_lock(philo->print_mutex);
 			printf("%ld %d %s\n", time, philo[i].id, "died");
-			// printf_with_id_and_time(&philo[i], philo[i].id, "died");
 			pthread_mutex_lock(philo->dead_mutex);
 			*philo->dead_flag = 1;
 			pthread_mutex_unlock(philo->dead_mutex);
@@ -84,11 +95,7 @@ void	*monitor(void *arg)
 	{
 		if (dead_comprobation(philo) == 0 || all_philos_ate(philo) == 0)
 			break ;
-		// ft_usleep(1);
+		ft_usleep(1);
 	}
 	return (arg);
 }
-
-
-//Comprobar que nadie muera mienntras come
-//Cambiar orden de los tenedores dependiendo de si es par o impar

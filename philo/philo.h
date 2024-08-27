@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:29 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/23 17:13:50 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/27 20:45:22 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	start_philo(t_data *data, pthread_mutex_t **forks, char *argv[]);
 //Routine functions
 void	*routine(void *arg);
 void	*monitor(void *arg);
+int		dead_philo(t_philo *philo);
 
 //Thread management
 void	create_threads(t_data *data, pthread_mutex_t *forks);
