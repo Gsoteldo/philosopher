@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:57:05 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/26 19:23:40 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/27 13:43:25 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	*monitor(void *arg)
 	{
 		if (dead_comprobation(philo) == 0 || all_philos_ate(philo) == 0)
 			break ;
-		ft_usleep(1);
+		// ft_usleep(1);
 	}
 	return (arg);
 }

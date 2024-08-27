@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 19:31:49 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/26 21:53:02 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/08/27 13:43:46 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void	sleeping(t_philo *philo)
  //La comprobacion es si el id es par o impar y de si el numero de filosofos es par o impar
 void	eating(t_philo *philo)
 {
-	// if (philo->id % 2 == 0)
+	if (philo->id % 2 != 0 && philo->num_of_philo % 2 == 0)
 		pthread_mutex_lock(philo->r_fork);
-	// else
-	// 	pthread_mutex_lock(philo->l_fork);
+	else
+		pthread_mutex_lock(philo->l_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
 	if (philo->num_of_philo == 1)
 	{
@@ -72,10 +72,10 @@ void	eating(t_philo *philo)
 		pthread_mutex_unlock(philo->r_fork);
 		return ;
 	}
-	// if (philo->id % 2 == 0)
+	if (philo->id % 2 != 0 && philo->num_of_philo % 2 == 0)
 		pthread_mutex_lock(philo->l_fork);
-	// else
-	// 	pthread_mutex_lock(philo->r_fork);
+	else
+		pthread_mutex_lock(philo->r_fork);
 	printf_with_id_and_time(philo, philo->id, "has taken a fork");
 	philo->eat_flag = 1;
 	printf_with_id_and_time(philo, philo->id, YELLOW "is eating" NC);
@@ -85,16 +85,16 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(philo->eat_mutex);
 	ft_usleep(philo->time_to_eat);//reutilizar la funcion de dormir
 	philo->eat_flag = 0;
-	// if (philo->id % 2 == 0)
-	// {
+	if (philo->id % 2 != 0 && philo->num_of_philo % 2 == 0)
+	{
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
-	// }
-	// else
-	// {
-	// 	pthread_mutex_unlock(philo->r_fork);
-	// 	pthread_mutex_unlock(philo->l_fork);
-	// }
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(philo->l_fork);
+	}
 }
 	/*printf("Philo %d: Eating %d \n", philo->id, philo->times_eaten + 1);*/
 
