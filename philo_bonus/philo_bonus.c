@@ -6,7 +6,7 @@
 /*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 18:40:08 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/24 19:46:53 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/28 12:21:19 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,3 @@ int main(int argc, char *argv[])
 	create_processes(&data);
 	return (0);
 }
-
-/*
-	Orden de las funciones en philo_bonus.c usando procesos:
-	1. check_valid_args
-	2. start_philo
-	3. create_processes
-	4. free_and_destroy
-*/

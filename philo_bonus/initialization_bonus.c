@@ -6,7 +6,7 @@
 /*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 14:54:14 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/26 11:59:02 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/28 13:20:32 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,6 @@ static void initialization_semaphores(t_data *data)
 		write(2, "Semaphore error\n", 16);
 		exit(1);
 	}
-	data->eat_semaphore = sem_open("/eat_sem", O_CREAT, 0644, 1);
-	if (data->eat_semaphore == SEM_FAILED)
-	{
-		write(2, "Semaphore error\n", 16);
-		exit(1);
-	}
 }
 
 void	start_philo(t_data *data, char *argv[])
@@ -71,6 +65,7 @@ void	start_philo(t_data *data, char *argv[])
 		write(2, "Malloc error\n", 13);
 		exit(1);
 	}
+	
 	init_values(data, argv);
 	initialization_semaphores(data);
 

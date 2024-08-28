@@ -6,7 +6,7 @@
 /*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 20:37:50 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/24 20:15:46 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/28 14:02:17 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ long	ft_atol(const char *str)
 void	printf_with_id_and_time(t_data *data, int id, char *str)
 {
 	size_t	time;
-
+	printf("Philo %d: is alive\n", data->philo->id);
 	sem_wait(data->print_semaphore);
+	printf("Entra en el semaforo de print\n");
 	time = get_current_time() - data->start_time;
 	if (data->dead_flag == 1)
 	{

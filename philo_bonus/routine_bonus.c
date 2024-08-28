@@ -6,7 +6,7 @@
 /*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:50:54 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/26 13:26:37 by gabo             ###   ########.fr       */
+/*   Updated: 2024/08/28 14:00:31 by gabo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	sleeping(t_data *data)
 void	eating(t_data *data)
 {
 	sem_wait(data->forks);
+	// printf("Philo %d: is alive\n", data->philo->id);
 	printf_with_id_and_time(data, data->philo->id, "has taken a fork");
 	if (data->num_of_philo == 1)
 	{
@@ -50,8 +51,8 @@ void	eating(t_data *data)
 	printf_with_id_and_time(data, data->philo->id, "is eating");
 	sem_wait(data->eat_semaphore);
 	data->last_meal = get_current_time();
-	data->philo->times_eaten++;
 	sem_post(data->eat_semaphore);
+	data->philo->times_eaten++;
 	ft_usleep(data->time_to_eat);
 	// data->eat_flag = 0;
 	sem_post(data->forks);
@@ -61,23 +62,26 @@ void	eating(t_data *data)
 
 void	*routine(t_data *data)
 {
+	data->last_meal = get_current_time();
 	if (pthread_create(&data->monitor_thread, NULL, monitor, (void *)data))
 	{
-		write(2, "Error creating thread\n", 23);
-		exit(1);
+		printf("Error creating monitor thread\n");
+		return (NULL);
 	}
 
 	if (data->philo->id % 2 == 0)
 		ft_usleep(1);
 	while (1)
 	{
+	
 		eating(data);
 		sleeping(data);
 		thinking(data);
 	}
 	if (pthread_join(data->monitor_thread, NULL))
 	{
-		write(2, "Error joining thread\n", 22);
-		exit(1);
+		printf("Error joining monitor thread\n");
+		return (NULL);
 	}
+	return (NULL);
 }
