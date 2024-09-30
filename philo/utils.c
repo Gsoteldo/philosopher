@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 15:43:31 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/23 17:10:57 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:55:20 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
-		usleep(500);
+		usleep(9);
 	return (0);
 }
 

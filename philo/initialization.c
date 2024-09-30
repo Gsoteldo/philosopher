@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 18:21:39 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/23 17:19:37 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:56:08 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ static void	init_values(t_data *data, char *argv[], pthread_mutex_t **forks)
 		data->philo[i].print_mutex = &data->print_mutex;
 		data->philo[i].eat_mutex = &data->eat_mutex;
 		data->philo[i].dead_mutex = &data->dead_mutex;
+		data->philo[i].init_philo = &data->init_philo;
 		init_arguments(&data->philo[i], argv);
 		data->philo[i].dead_flag = &data->dead_flag;
 		data->philo[i].l_fork = *forks + i;
-		if (i == 0)
-			data->philo[i].r_fork = *forks + (ft_atoi(argv[1]) - 1);
-		else
-			data->philo[i].r_fork = *forks + (i - 1);
+		data->philo[i].r_fork = *forks + (i + 1) % ft_atoi(argv[1]);
 		i++;
 	}
 }
@@ -68,13 +66,14 @@ void	start_philo(t_data *data, pthread_mutex_t **forks, char *argv[])
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->eat_mutex, NULL);
 	pthread_mutex_init(&data->dead_mutex, NULL);
-	data->philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
+	pthread_mutex_init(&data->init_philo, NULL);
+	data->philo = malloc(sizeof(t_philo) * (ft_atoi(argv[1])));
 	if (!data->philo)
 	{
 		printf(RED "Error: " NC "Fail creating philo\n");
 		free_and_destroy(data, *forks, NULL);
 	}
-	*forks = malloc(sizeof(pthread_mutex_t) * ft_atoi(argv[1]));
+	*forks = malloc(sizeof(pthread_mutex_t) * (ft_atoi(argv[1])));
 	if (!forks)
 	{
 		printf(RED "Error: " NC "Fail creating forks\n");

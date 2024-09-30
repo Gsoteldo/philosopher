@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 17:07:29 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/27 20:45:22 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:55:27 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 	pthread_mutex_t	*eat_mutex;
 	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*dead_mutex;
+	pthread_mutex_t	*init_philo;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_t		thread;
@@ -52,6 +53,7 @@ typedef struct s_data
 	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	dead_mutex;
+	pthread_mutex_t	init_philo;
 	t_philo			*philo;
 }	t_data;
 
@@ -75,5 +77,6 @@ void	printf_with_id_and_time(t_philo *philo, int id, char *str);
 size_t	get_current_time(void);
 void	free_and_destroy(t_data *data, pthread_mutex_t *forks, char *str);
 int		ft_usleep(size_t milliseconds);
+void	check_alive(size_t time, t_philo *philo, char *str);
 
 #endif

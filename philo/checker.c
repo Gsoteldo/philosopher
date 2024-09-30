@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:22:30 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/23 17:13:49 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/09/17 20:55:36 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,26 @@ int	check_valid_args(int argc, char *argv[])
 		i++;
 	}
 	return (1);
+}
+
+void	check_alive(size_t time, t_philo *philo, char *str)
+{
+	time_t	start;
+
+	start = get_current_time();
+	if (str)
+		printf_with_id_and_time(philo, philo->id, str);
+	while (1)
+	{
+		pthread_mutex_lock(philo->dead_mutex);
+		if (*philo->dead_flag == 1)
+		{
+			pthread_mutex_unlock(philo->dead_mutex);
+			return ;
+		}
+		pthread_mutex_unlock(philo->dead_mutex);
+		if (get_current_time() - start >= time)
+			break ;
+		usleep(100);
+	}
 }

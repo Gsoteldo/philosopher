@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:57:05 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/27 20:58:31 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:31:19 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,11 @@ int	all_philos_ate(t_philo *philo)
 		return (1);
 	while (i < philo[0].num_of_philo)
 	{
+		pthread_mutex_lock(philo->eat_mutex);
 		if (philo[i].times_eaten >= philo[i].num_of_meals)
 			count++;
 		i++;
+		pthread_mutex_unlock(philo->eat_mutex);
 	}
 	if (count == philo[0].num_of_philo)
 	{
@@ -95,7 +97,7 @@ void	*monitor(void *arg)
 	{
 		if (dead_comprobation(philo) == 0 || all_philos_ate(philo) == 0)
 			break ;
-		ft_usleep(1);
+		usleep(100);
 	}
 	return (arg);
 }
