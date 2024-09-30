@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 20:37:50 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/28 14:02:17 by gabo             ###   ########.fr       */
+/*   Updated: 2024/09/30 21:49:10 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_usleep(size_t milliseconds)
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
-		usleep(500);
+		usleep(9);
 	return (0);
 }
 
@@ -61,9 +61,9 @@ long	ft_atol(const char *str)
 void	printf_with_id_and_time(t_data *data, int id, char *str)
 {
 	size_t	time;
-	printf("Philo %d: is alive\n", data->philo->id);
+	// printf("Philo %d: is alive3333\n", data->philo->id);
 	sem_wait(data->print_semaphore);
-	printf("Entra en el semaforo de print\n");
+	// printf("Entra en el semaforo de print\n");
 	time = get_current_time() - data->start_time;
 	if (data->dead_flag == 1)
 	{
@@ -78,5 +78,5 @@ void	printf_with_id_and_time(t_data *data, int id, char *str)
 
 void kill_them_all()
 {
-	kill(0, SIGINT);
+	kill(0, SIGKILL);
 }

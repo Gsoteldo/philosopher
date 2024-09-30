@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_management_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 19:43:47 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/28 13:13:00 by gabo             ###   ########.fr       */
+/*   Updated: 2024/09/30 21:49:01 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	philo_life(t_data *data)
 
 	str = ft_strjoin( "/", ft_itoa(data->philo->id));
 	if (str == NULL)
+	{
+		printf("Error: fail creating sem\n");
 		kill_them_all();
+	}
 	sem_unlink(str);
 	data->eat_semaphore = sem_open(str, O_CREAT, 0644, 1);
 	if (data->eat_semaphore == SEM_FAILED)
@@ -26,8 +29,6 @@ void	philo_life(t_data *data)
 		write(2, "Semaphore error\n", 16);
 		kill_them_all();
 	}
-
-
 }
 
 void	create_processes(t_data *data)
@@ -47,6 +48,7 @@ void	create_processes(t_data *data)
 	if (data->philo->pid == 0)
 	{
 		data->philo->id = i + 1;
+		printf("Existen %d filosofos\n", i);
 		philo_life(data);
 		routine(data);
 	}

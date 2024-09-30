@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 14:54:14 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/28 13:20:32 by gabo             ###   ########.fr       */
+/*   Updated: 2024/09/30 21:08:58 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void initialization_semaphores(t_data *data)
 	sem_unlink("print_mutex");
 	sem_unlink("dead_mutex");
 	sem_unlink("eat_mutex");
-	data->forks = sem_open("forks", O_CREAT, 0644, data->num_of_philo);
+	data->forks = sem_open("/forks", O_CREAT, 0644, data->num_of_philo);
 	if (data->forks == SEM_FAILED)
 	{
 		write(2, "Semaphore error\n", 16);
@@ -50,6 +50,12 @@ static void initialization_semaphores(t_data *data)
 	}
 	data->dead_semaphore = sem_open("/dead_sem", O_CREAT, 0644, 1);
 	if (data->dead_semaphore == SEM_FAILED)
+	{
+		write(2, "Semaphore error\n", 16);
+		exit(1);
+	}
+	data->eat_semaphore = sem_open("/eat_sem", O_CREAT, 0644, 1);
+	if (data->eat_semaphore == SEM_FAILED)
 	{
 		write(2, "Semaphore error\n", 16);
 		exit(1);
@@ -68,5 +74,4 @@ void	start_philo(t_data *data, char *argv[])
 	
 	init_values(data, argv);
 	initialization_semaphores(data);
-
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 21:21:49 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/28 12:50:56 by gabo             ###   ########.fr       */
+/*   Updated: 2024/09/30 21:51:24 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int someone_died(t_data *data)
 	if (check_if_dead(data))
 	{
 		printf_with_id_and_time(data, data->philo->id, "died");
-		kill_them_all();
-		return (1);
+		exit(1);
 	}
 	return (0);
 } 
