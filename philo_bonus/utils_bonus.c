@@ -6,7 +6,7 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 20:37:50 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/09/30 21:49:10 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:51:33 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ size_t	get_current_time(void)
 
 long	ft_atol(const char *str)
 {
-	int	i;
+	int		i;
 	long	num;
-	int	negativo;
+	int		negativo;
 
 	i = 0;
 	num = 0;
@@ -61,9 +61,8 @@ long	ft_atol(const char *str)
 void	printf_with_id_and_time(t_data *data, int id, char *str)
 {
 	size_t	time;
-	// printf("Philo %d: is alive3333\n", data->philo->id);
+
 	sem_wait(data->print_semaphore);
-	// printf("Entra en el semaforo de print\n");
 	time = get_current_time() - data->start_time;
 	if (data->dead_flag == 1)
 	{
@@ -72,11 +71,34 @@ void	printf_with_id_and_time(t_data *data, int id, char *str)
 	}
 	printf("%ld %d %s\n", time, id, str);
 	sem_post(data->print_semaphore);
+	return ;
 }
 
-
-
-void kill_them_all()
+void	kill_them_all(t_data *data)
 {
-	kill(0, SIGKILL);
+	int	status;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	status = 0;
+	while (i < data->num_of_philo)
+	{
+		waitpid(-1, &status, 0);
+		if (status != 0)
+		{
+			while (j++ < data->num_of_philo)
+				kill(data->philo[j].pid, SIGINT);
+			break ;
+		}
+		i++;
+	}
+	sem_close(data->forks);
+	sem_close(data->print_semaphore);
+	sem_close(data->dead_semaphore);
+	sem_close(data->eat_semaphore);
+	(sem_unlink("/forks"), sem_unlink("/eat_sem"));
+	(sem_unlink("/print_sem"), sem_unlink("/dead_sem"));
+	free(data->philo);
 }

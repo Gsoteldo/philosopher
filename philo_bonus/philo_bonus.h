@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 18:43:45 by gsoteldo          #+#    #+#             */
-/*   Updated: 2024/08/26 13:22:59 by gabo             ###   ########.fr       */
+/*   Updated: 2024/10/04 00:55:36 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_data
 	t_philo			*philo;
 }	t_data;
 
-int	check_valid_args(int argc, char *argv[]);
+int		check_valid_args(int argc, char *argv[]);
 
 void	start_philo(t_data *data, char *argv[]);
 void	create_processes(t_data *data);
@@ -69,7 +69,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 
 size_t	get_current_time(void);
-int	ft_usleep(size_t milliseconds);
-void kill_them_all();
+int		ft_usleep(size_t milliseconds);
+void	kill_them_all(t_data *data);
 
 #endif

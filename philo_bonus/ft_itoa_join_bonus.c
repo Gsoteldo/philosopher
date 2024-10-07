@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_join_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gabo <gabo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 13:15:07 by gabo              #+#    #+#             */
-/*   Updated: 2024/08/26 13:24:38 by gabo             ###   ########.fr       */
+/*   Updated: 2024/10/04 00:57:58 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
-
 
 /** digit_counter
  * Cuenta el número de dígitos en el número entero proporcionado.

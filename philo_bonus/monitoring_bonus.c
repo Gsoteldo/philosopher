@@ -6,50 +6,47 @@
 /*   By: gsoteldo <gsoteldo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 21:21:49 by gabo              #+#    #+#             */
-/*   Updated: 2024/09/30 21:51:24 by gsoteldo         ###   ########.fr       */
+/*   Updated: 2024/10/07 18:59:19 by gsoteldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	is_dead(t_data *data)
+void	is_dead(t_data *data)
 {
 	sem_wait(data->eat_semaphore);
-	if (get_current_time() - data->last_meal >= data->time_to_die
-		&& data->eat_flag == 0)
-	{
-		sem_post(data->eat_semaphore);
-		return (1);
-	}
-	sem_post(data->eat_semaphore);
-	return (0);
-}
-
-int check_if_dead(t_data *data)
-{
-		if (is_dead(data))
-			return (1);
-	return (0);
-}
-int someone_died(t_data *data)
-{
-	if (check_if_dead(data))
+	if (get_current_time() - data->last_meal >= data->time_to_die)
 	{
 		printf_with_id_and_time(data, data->philo->id, "died");
+		sem_wait(data->print_semaphore);
+		data->dead_flag = 1;
 		exit(1);
 	}
-	return (0);
-} 
+	sem_post(data->eat_semaphore);
+}
 
 void	*monitor(void *arg)
 {
 	t_data	*data;
+	int		i;
 
+	i = 0;
 	data = (t_data *)arg;
 	while (1)
 	{
-		if (someone_died(data))
-			break ;
+		is_dead(data);
+		if (data->dead_flag == 1)
+			exit(0);
+		usleep(100);
+		while (data->num_of_meals != -1 \
+			&& data->philo[i].times_eaten >= data->num_of_meals \
+			&& i < data->num_of_philo)
+			i++;
+		if (i == data->num_of_philo)
+		{
+			data->dead_flag = 1;
+			exit(0);
+		}
 	}
 	return (NULL);
 }
